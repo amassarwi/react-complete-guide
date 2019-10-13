@@ -15,7 +15,8 @@ const buildControls = ({
   ingredientRemoved,
   disabled,
   price,
-  purchasable
+  purchasable,
+  ordered
 }) => (
   <div className={styles.BuildControls}>
     <p>Current Price: <strong>{price.toFixed(2)}</strong></p>
@@ -24,6 +25,7 @@ const buildControls = ({
     ))}
     <button className={styles.OrderButton}
             disabled={!purchasable}
+            onClick={ordered}
     >
       Order now
       </button>
