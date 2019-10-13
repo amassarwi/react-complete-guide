@@ -2,11 +2,11 @@ import React from 'react';
 
 import styles from './BuildControl.module.css';
 
-const buildControl = ({label}) => (
+const buildControl = ({label, added, removed, disabled}) => (
   <div className={styles.BuildControl}>
     <div>{label}</div>
-    <button className={styles.Less}>Less</button>
-    <button className={styles.More}>More</button>
+    <button className={styles.Less} onClick={removed} disabled={disabled}>Less</button>
+    <button className={styles.More} onClick={added}>More</button>
   </div>
 );
 
