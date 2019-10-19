@@ -1,13 +1,13 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import styles from './NavigationItem.module.css';
 
-const navigationItem = ({children, link, active}) => (
+const navigationItem = ({children, link, exact}) => (
   <li className={styles.NavigationItem}>
-    <a href={link}
-       className={active ? styles.active : null}>
+    <NavLink to={link} activeClassName={styles.active} exact={exact}>
       {children}
-    </a>
+    </NavLink>
   </li>
 );
 
