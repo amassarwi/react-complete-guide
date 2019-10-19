@@ -12,7 +12,8 @@ class Checkout extends Component {
       meat: 0,
       cheese: 0,
       bacon: 0
-    }
+    },
+    totalPrice: 0,
   }
 
   checkoutCancelledHandler = () => {
@@ -23,11 +24,15 @@ class Checkout extends Component {
     this.props.history.replace('/checkout/contact-data');
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const query = new URLSearchParams(this.props.location.search);
     const ingredients = {};
     for (let [key, value] of query.entries()) {
-      ingredients[key] = +value;
+      if (key === 'price') {
+        this.setState({totalPrice: +value})
+      } else {
+        ingredients[key] = +value;
+      }
     }
 
     this.setState({ingredients: ingredients});
@@ -40,7 +45,7 @@ class Checkout extends Component {
           ingredients={this.state.ingredients}
           checkoutContinued={this.checkoutContinuedHandler}
           checkoutCancelled={this.checkoutCancelledHandler} />
-        <Route path={this.props.match.path + '/contact-data'} component={ContactData} />
+        <Route path={this.props.match.path + '/contact-data'} render={(props) => (<ContactData ingredients={this.state.ingredients} price={this.state.totalPrice} {...props} />)} />
       </div>
     );
   }
