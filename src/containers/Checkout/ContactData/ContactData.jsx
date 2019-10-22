@@ -20,6 +20,7 @@ class ContactData extends Component {
           required: true,
         },
         valid: false,
+        touched: false
       },
       street: {
         elementType: 'input',
@@ -32,6 +33,7 @@ class ContactData extends Component {
           required: true,
         },
         valid: false,
+        touched: false
       },
       zipCode: {
         elementType: 'input',
@@ -46,6 +48,7 @@ class ContactData extends Component {
           maxLength: 5,
         },
         valid: false,
+        touched: false
       },
       country: {
         elementType: 'input',
@@ -58,6 +61,7 @@ class ContactData extends Component {
           required: true,
         },
         valid: false,
+        touched: false
       },
       email: {
         elementType: 'input',
@@ -70,6 +74,7 @@ class ContactData extends Component {
           required: true,
         },
         valid: false,
+        touched: false
       },
       deliveryMethod: {
         elementType: 'select',
@@ -131,6 +136,7 @@ class ContactData extends Component {
 
     updatedFormEl.value = event.target.value;
     updatedFormEl.valid = this.checkValidity(updatedFormEl.value, updatedFormEl.validation);
+    updatedFormEl.touched = true;
     updatedOrderForm[inputName] = updatedFormEl;
     this.setState({ orderForm : updatedOrderForm });
   }
@@ -154,7 +160,11 @@ class ContactData extends Component {
                 elementConfig={el.config.elementConfig}
                 value={el.config.value}
                 key={el.id}
-                changed={(event) => this.inputChangedHandler(event, el.id)} />
+                changed={(event) => this.inputChangedHandler(event, el.id)}
+                invalid={!el.config.valid}
+                shouldValidate={el.config.validation}
+                touched={el.config.touched}
+                errorMessage={`please enter valid ${el.id}`} />
             )
           }
           <Button type="Success"
