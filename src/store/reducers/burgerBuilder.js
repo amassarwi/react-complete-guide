@@ -14,39 +14,47 @@ const initialState = {
   error: false,
 };
 
+const addIngredient = (state, action) => {
+  const updatedIngredients = updateObject(state.ingredients, {
+    [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
+  });
+  return updateObject(state, {
+    ingredients: updatedIngredients,
+    totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+  });
+}
+
+const removeIngredient = (state, action) => {
+  const updatedIngredients = updateObject(state.ingredients, {
+    [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
+  });
+  return updateObject(state, {
+    ingredients: updatedIngredients,
+    totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+  });
+}
+
+const setIngredient = (state, action) => {
+  return updateObject(state, {
+    ingredients: action.ingredients,
+    totalPrice: 4,
+    error: false,
+  });
+}
+
+const fetchIngredientsFailed = (state, action) => {
+  return updateObject(state, {
+    error: true,
+  });
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case at.ADD_INGREDIENT: {
-      const updatedIngredients = updateObject(state.ingredients, {
-        [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
-      });
-      return updateObject(state, {
-        ingredients: updatedIngredients,
-        totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
-      });
-    }
-    case at.REMOVE_INGREDIENT: {
-      const updatedIngredients = updateObject(state.ingredients, {
-        [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
-      });
-      return updateObject(state, {
-        ingredients: updatedIngredients,
-        totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
-      });
-    }
-    case at.SET_INGREDIENT:
-      return updateObject(state, {
-        ingredients: action.ingredients,
-        totalPrice: 4,
-        error: false,
-      });
-    case at.FETCH_INGREDIENTS_FAILED:
-      return updateObject(state, {
-        error: true,
-      });
-    default: {
-      return state;
-    }
+    case at.ADD_INGREDIENT: return addIngredient(state, action);
+    case at.REMOVE_INGREDIENT: return removeIngredient(state, action);
+    case at.SET_INGREDIENT: return setIngredient(state, action);
+    case at.FETCH_INGREDIENTS_FAILED: return fetchIngredientsFailed(state, action);
+    default: return state;
   }
 };
 
