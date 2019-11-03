@@ -1,4 +1,4 @@
-import * as at from './actions';
+import * as at from '../actions/actionTypes';
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
