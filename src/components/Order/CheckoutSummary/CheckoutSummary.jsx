@@ -10,9 +10,9 @@ const checkoutSummary = ({ingredients, checkoutContinued, checkoutCancelled}) =>
       <div style={{width: '100%', margin: 'auto'}}>
         <Burger ingredients={ingredients} />
       </div>
-      <Button type="Danger"
+      <Button btnType="Danger"
               clicked={checkoutCancelled}>Cancel</Button>
-      <Button type="Success"
+      <Button btnType="Success"
               clicked={checkoutContinued}>Continue</Button>
     </div>
   );

@@ -178,7 +178,7 @@ class ContactData extends Component {
                 errorMessage={`please enter valid ${el.id}`} />
             )
           }
-          <Button type="Success"
+          <Button btnType="Success"
                   clicked={this.orderHandler}
                   disabled={!this.state.formIsValid}>
             Order
