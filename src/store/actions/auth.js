@@ -55,3 +55,10 @@ export const auth = (email, password, isSignup) => {
       });
   }
 }
+
+export const setAuthRedirectPath = (url) => {
+  return {
+    type: at.SET_AUTH_REDIRECT_PATH,
+    url,
+  }
+}
